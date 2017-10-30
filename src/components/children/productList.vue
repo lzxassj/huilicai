@@ -1,11 +1,11 @@
 <template>
   <div class="pl-main">
     <ul>
-      <router-link :to="{path: '/product/' + product.productId}" tag="li" :key="product.productId" v-for="product in productData.subList">
+      <router-link :to="{path: '/product/' + product.productId + '/' +  + product.platId}" tag="li" :key="product.productId" v-for="product in productData.subList">
         <h3>{{ product.name }}</h3>
         <div class="tag">
-          <div class="img-div" v-if="product.tagList.length || product.logo">
-            <img :src="product.logo" alt="" v-if="product.logo">
+          <div class="img-div" v-if="product.platLogo">
+            <img :src="product.platLogo" alt="" v-if="product.platLogo">
           </div>
 
           <router-link 

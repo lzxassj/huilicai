@@ -1,11 +1,11 @@
 <template>
   <footer id="mainFooter">
-    <router-link :to="{path: '/', query: { footer: 'licai' }}" class="item-1" :class="{unactive: tabType!='licai'}">
+    <router-link :to="{path: '/', query: { footer: 'licai', navType: 'product' }}" class="item-1" :class="{unactive: tabType!='licai'}">
       <i></i>
       理财
     </router-link>
 
-    <router-link :to="{path: '/comment', query: { footer: 'pinglun' }}" class="item-2" :class="{unactive: tabType!='pinglun'}">
+    <router-link :to="{path: '/comment', query: { footer: 'pinglun', navType: 'comment' }}" class="item-2" :class="{unactive: tabType!='pinglun'}">
       <i></i>
       评论
     </router-link>

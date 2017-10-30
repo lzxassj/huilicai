@@ -32,7 +32,7 @@ export default new Router({
       component: Comment
     },
     {
-      path: '/product/:id',
+      path: '/product/:id/:platId',
       name: 'Product',
       component: Product
     },

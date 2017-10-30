@@ -13,7 +13,7 @@
     <div class="content">
       <router-link class="ly-div" :to="{path: '/leaveMsg', query: {productId: productId, platId: platId, fromModule: fromModule}}" tag="div">留下您的评论...</router-link>
 
-      <div class="comment-div" v-for="comment in commentList.subList" :key="comment.autoId">
+      <div class="comment-div" v-for="(comment, key) in commentList.subList" :key="comment.autoId">
         <div class="comment-author">
           <div class="img-div">
             <img :src="comment.headUrl" alt="" v-if="comment.headUrl">
@@ -28,8 +28,8 @@
               <!-- <span v-for="(value, key) in comment.tips" :key="key">#{{ value }}#</span> -->
               <router-link 
                 :to="{path: item.hotType == 3 ? '/tagSearchRes?tagId=' + item.hotId + '&tagName=' + item.name + '&fromModule=comment&isComment=false' : '/platForm/' + item.hotId}" 
-                tag="span" v-for="(item, key) in comment.tips" 
-                :key="key">#{{ item.name }}#
+                tag="span" v-for="(item, cKey) in comment.tips" 
+                :key="cKey">#{{ item.name }}#
               </router-link>
             </li>
             <li class="item-3">{{ comment.remark }}</li>
@@ -105,6 +105,7 @@ export default {
   mounted () {
     this.fromModule = this.$route.name.toLocaleLowerCase()
     this.id = parseInt(this.$route.params.id)
+    this.platId = parseInt(this.$route.params.platId)
     this.getData()
   },
   props: ['params'],
@@ -121,6 +122,7 @@ export default {
       this.navFixedVisible = a
     },
     showPopup (key, id, dataIndex) {
+      console.log(dataIndex)
       if (parseInt(id) > 0) {
         this.commentRaiseParams.data.commentId = id
       }
@@ -143,7 +145,7 @@ export default {
       if (this.$route.name === 'Product') {
         this.productId = this.id
         apiParams.productId = this.id
-        apiParams.platId = -1
+        apiParams.platId = this.platId
       } else if (this.$route.name === 'PlatForm') {
         this.platId = this.id
         apiParams.productId = -1
@@ -234,6 +236,7 @@ export default {
             })
           }
         }).catch(function () {
+          console.log(123)
           that.$toast({
             message: '请求错误',
             duration: 800

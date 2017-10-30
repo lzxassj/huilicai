@@ -18,6 +18,7 @@ export default {
   name: 'cHeader',
   data () {
     return {
+      urlNavType: '',
       banners: {},
       swiperSlides: {},
       swiperOption: {
@@ -32,19 +33,25 @@ export default {
   props: ['navType'],
   watch: {
     navType: function (newValue) {
-      if (newValue === 'platform') {
-        this.swiperSlides = this.banners.platBanners
-      } else if (newValue === 'product') {
-        this.swiperSlides = this.banners.productBanners
-      } else {
-        this.swiperSlides = this.banners.commentBanners
-      }
+      this.showBanner(newValue)
       this.$refs.bannerSwiper.swiper.slideTo(0)
+    },
+    banners: function (newValue) {
+      this.showBanner(this.urlNavType)
     }
   },
   mounted () {
     this.getBanner()
+    this.urlNavType = this.$route.query.navType
+    this.showBanner(this.urlNavType)
   },
+  // computed: {
+  //   xx () {
+  //     console.log(123)
+  //     this.navType = this.$route.query.navType
+  //     return true
+  //   }
+  // },
   components: {
     swiper, swiperSlide
   },
@@ -55,6 +62,16 @@ export default {
         that.banners = res.data.data
         that.swiperSlides = res.data.data.productBanners
       })
+    },
+    showBanner (navType) {
+      console.log(navType)
+      if (navType === 'platform') {
+        this.swiperSlides = this.banners.platBanners
+      } else if (navType === 'product') {
+        this.swiperSlides = this.banners.productBanners
+      } else {
+        this.swiperSlides = this.banners.commentBanners
+      }
     }
   }
 }

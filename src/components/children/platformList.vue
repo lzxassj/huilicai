@@ -2,12 +2,12 @@
   <div class="pl-main">
     <ul>
       <router-link :to="{path: '/platForm/' + platform.platId}" tag="li" v-for="platform in platformData.subList" :key="platform.platId">
-        
         <h3>{{ platform.name }}</h3>
         <div class="tag">
-          <div class="img-div" v-if="platform.tagList.length || platform.logo">
+          <div class="img-div" v-if="platform.logo">
             <img :src="platform.logo" alt="" v-if="platform.logo">
           </div>
+
           <router-link 
             :to="{path: item.hotType == 3 ? '/tagSearchRes?tagId=' + item.hotId + '&tagName=' + item.name + '&fromModule=platform&isComment=false' : '/platForm/' + item.hotId}" 
             tag="span" v-for="(item, key) in platform.tagList" 

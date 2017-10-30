@@ -4,7 +4,7 @@
       <span>回帖</span>
       <span class="btn" @click="submit()">发布</span>
     </div>
-    <textarea v-model="form.content" name="" id="" placeholder="|  留下您的言论..."></textarea>
+    <textarea v-model="form.content" name="" id="" placeholder="留下您的言论..."></textarea>
   </div>
 </template>
 
