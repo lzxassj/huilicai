@@ -10,6 +10,7 @@ import CommentSearch from '@/components/CommentSearch'
 import TagSearchRes from '@/components/TagSearchRes'
 import LeaveMsg from '@/components/LeaveMsg'
 import Reply from '@/components/Reply'
+import Loadmore from '@/components/Test/Loadmore'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ export default new Router({
       path: '/reply',
       name: 'Reply',
       component: Reply
+    },
+    {
+      path: '/test/loadmore',
+      name: 'Loadmore',
+      component: Loadmore
     }
   ]
 })

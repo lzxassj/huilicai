@@ -15,6 +15,7 @@ body {
   width: 6.4rem;
   color: $color-1;
   margin: 0 auto;
+  background: #dddddd;
 }
 
 img {
@@ -66,11 +67,12 @@ textarea {
 }
 
 .div-content {
-  padding-bottom: pxToRem(44px);
+  margin-bottom: pxToRem(44px);
+  // padding-bottom: pxToRem(44px);
   // width: 6.4rem;
   // position: absolute;
   // top: 0;
-  // left: 50%;
+  // left: 0;
   // right: 0;
   // bottom: pxToRem(44px);
   // @include compatible(transform, translateX(-50%));

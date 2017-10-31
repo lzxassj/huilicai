@@ -1,5 +1,5 @@
 <template>
-  <div class="div-content">
+  <div class="div-content" id="divContent">
     <c-header :nav-type="'comment'"></c-header>
     <c-comment></c-comment>
     <c-footer></c-footer>

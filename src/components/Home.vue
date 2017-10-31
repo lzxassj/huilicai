@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="div-content">
+    <div class="div-content" id="divContent">
       <c-header :nav-type="navType"></c-header>
       <div class="nav-div">
         <nav :class="{fixed: headerFixedVisible}">
