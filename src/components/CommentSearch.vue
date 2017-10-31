@@ -9,13 +9,13 @@
       <span class="clear_search" v-if="searchKey" @click="searchKey = ''"></span>
     </div>
 
-    <dl class="hot" v-if="hotData && !Object.keys(result).length">
+    <dl class="hot" v-if="hotData && !isSubmit">
       <dt>热门</dt>
       <router-link :to="{path: '/tagSearchRes', query: {tagId: item.hotId, tagName: item.name, fromModule: 'comment', isComment: false}}" tag="dd" v-for="item in hotData" :key="item.hotId">#{{ item.name }}#</router-link>
     </dl>
 
-    <div class="result">
-      <dl class="tag" v-if="result.length">
+    <div class="result" v-if="isSubmit">
+      <dl class="tag">
         <dt>标签({{ result.length }})</dt>
         <router-link :to="{path: '/tagSearchRes', query: {tagId: item.hotId, tagName: item.name, fromModule: 'comment', isComment: false}}" tag="dd" v-for="item in result" :key="item.hotId" v-html="highlight('#'+item.name+'#', searchKey, 'red')"></router-link>
       </dl>
@@ -31,7 +31,15 @@ export default {
     return {
       searchKey: '',
       hotData: {},
-      result: []
+      result: [],
+      isSubmit: false
+    }
+  },
+  watch: {
+    searchKey: function (newValue) {
+      if (!newValue) {
+        this.isSubmit = false
+      }
     }
   },
   mounted () {
@@ -71,6 +79,7 @@ export default {
       this.$axios.get(api.path, { params: { key: this.searchKey } }).then(res => {
         this.$indicator.close()
         if (!res.data.code) {
+          that.isSubmit = true
           that.result = res.data.data
         } else {
           that.$toast({

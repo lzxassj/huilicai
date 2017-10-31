@@ -9,18 +9,18 @@
       <span class="clear_search" v-if="searchKey" @click="searchKey = ''"></span>
     </div>
 
-    <dl class="hot" v-if="hotData && !Object.keys(result).length">
+    <dl class="hot" v-if="hotData && !isSubmit">
       <dt>热门</dt>
       <router-link :to="{path: '/tagSearchRes', query: {tagId: item.hotId, tagName: item.name, fromModule: 'platform', isComment: isComment}}" tag="dd" v-for="item in hotData" :key="item.hotId">#{{ item.name }}#</router-link>
     </dl>
 
-    <div class="result" v-if="Object.keys(result).length">
-      <dl class="platform" v-if="result.plats.length" :class="{'bottom-line': result.tags.length}">
+    <div class="result" v-if="isSubmit">
+      <dl class="platform" v-if="result.plats.length || !result.tags.length" :class="{'bottom-line': result.tags.length}">
         <dt>平台({{ result.plats.length }})</dt>
         <dd v-for="item in result.plats" :key="item.hotId" v-html="highlight(item.name, searchKey, 'red')" @click="selectPlat(item.hotId, item.name)"></dd>
       </dl>
 
-      <dl class="tag" v-if="result.tags.length">
+      <dl class="tag" v-if="result.tags.length || !result.plats.length">
         <dt>标签({{ result.tags.length }})</dt>
         <router-link :to="{path: '/tagSearchRes', query: {tagId: item.hotId, tagName: item.name, fromModule: 'platform', isComment: isComment}}" tag="dd" v-for="item in result.tags" :key="item.hotId" v-html="highlight('#'+item.name+'#', searchKey, 'red')"></router-link>
       </dl>
@@ -37,10 +37,18 @@ export default {
       searchKey: '',
       hotData: {},
       result: {},
-      isComment: false
+      isComment: false,
+      isSubmit: false
     }
   },
   computed: {
+  },
+  watch: {
+    searchKey: function (newValue) {
+      if (!newValue) {
+        this.isSubmit = false
+      }
+    }
   },
   mounted () {
     if (this.$route.query.isComment === 'true' || this.$route.query.isComment === true) {
@@ -82,6 +90,7 @@ export default {
       this.$axios.get(api.path, { params: { key: this.searchKey } }).then(res => {
         this.$indicator.close()
         if (!res.data.code) {
+          that.isSubmit = true
           that.result = res.data.data
         } else {
           that.$toast({
