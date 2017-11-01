@@ -1,5 +1,5 @@
 <template>
-  <div class="leaveMsg">
+  <div class="leaveMsg white-content">
     <div class="title clear">
       <span>回帖</span>
       <span class="btn" @click="submit()">发布</span>
@@ -74,7 +74,8 @@ export default {
 @import './static/scss/config.scss';
 
 .leaveMsg {
-  width: pxToRem(338px);
+  width: auto;
+  padding: 0 pxToRem(20px);
   margin: 0 auto;
   .title {
     padding: pxToRem(15px) 0;
@@ -97,7 +98,7 @@ export default {
   }
 
   textarea {
-    width: pxToRem(306px);
+    width: pxToRem(303px);
     height: pxToRem(130px);
     border: 1px solid #a1a1a1;
     @include compatible(border-radius,

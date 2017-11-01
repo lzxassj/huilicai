@@ -3,10 +3,11 @@
     <div id="prInfo">
       <h3>{{ detail.name }}</h3>
 
-      <div class="tag clear" v-if="detail.tagList.length || detail.logo">
-        <div class="img-div">
-          <img :src="detail.logo" alt="" v-if="detail.logo">
-        </div>
+      <div class="tag clear" v-if="detail.tagList.length || detail.platLogo">
+        <router-link tag="div" class="img-div" :to="{path: '/platForm/' + detail.platId}"  v-if="detail.platLogo">
+          <img :src="detail.platLogo" alt="" v-if="detail.platLogo">
+        </router-link>
+
         <router-link 
           :to="{path: item.hotType == 3 ? '/tagSearchRes?tagId=' + item.hotId + '&tagName=' + item.name + '&fromModule=platform&isComment=false' : '/platForm/' + item.hotId}" 
           tag="span" 

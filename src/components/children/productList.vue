@@ -4,9 +4,9 @@
       <router-link :to="{path: '/product/' + product.productId + '/' +  + product.platId}" tag="li" :key="product.productId" v-for="product in productData.subList">
         <h3>{{ product.name }}</h3>
         <div class="tag">
-          <div class="img-div" v-if="product.platLogo">
-            <img :src="product.platLogo" alt="" v-if="product.platLogo">
-          </div>
+          <router-link tag="div" class="img-div" :to="{path: '/platForm/' + product.platId}" v-if="product.platLogo">
+            <img :src="product.platLogo" alt="">
+          </router-link>
 
           <router-link 
             :to="{path: item.hotType == 3 ? '/tagSearchRes?tagId=' + item.hotId + '&tagName=' + item.name + '&fromModule=platform&isComment=false' : '/platForm/' + item.hotId}" 

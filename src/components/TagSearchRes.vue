@@ -1,5 +1,5 @@
 <template>
-  <div class="tag-search-res">
+  <div class="tag-search-res white-content">
     <h3>#{{ tagName }}#</h3>
     <dl v-if="fromModule === 'paltform'">
       <dt>平台({{ result.subList.length }})</dt>
