@@ -49,6 +49,13 @@ router.beforeEach((to, from, next) => {
     userId = sessionStorage.getItem('userId')
   }
 
+  // 是否微信判断
+  let ua = window.navigator.userAgent.toLowerCase()
+  if (!/micromessenger/.test(ua)) {
+    location.replace('/page/index.html')
+    return
+  }
+
   if (!token || !userId) {
     new Vue().$axios.get(api.userLoginUrl.path).then(function (res) {
       if (!res.data.code) {
@@ -98,7 +105,12 @@ Vue.prototype.$axios.interceptors.response.use(
   },
   error => {
     if (!error.hasOwnProperty('response') || !error.response) {
-      return {data: {code: 1, msg: 'Network Error'}}
+      return {
+        data: {
+          code: 1,
+          msg: 'Network Error'
+        }
+      }
     } else {
       if (error.response.status === 900) {
         location.href = error.response.data.data
