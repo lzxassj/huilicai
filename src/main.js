@@ -74,7 +74,7 @@ router.beforeEach((to, from, next) => {
 
 // axios默认配置项
 Vue.prototype.$axios = axios.create({
-  baseURL: 'http://api.hidave.ltd/',
+  baseURL: 'http://api.moneyfree.cn/',
   timeout: 10000,
   params: {
     // os: 'H5'
